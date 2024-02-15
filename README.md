@@ -1,8 +1,8 @@
 # Saving my zsh configurations here
 
 #first install zsh
-# $
- sudo apt install zsh
+# linux
+$ sudo apt install zsh
 
 # REQUIRES
 #starship
