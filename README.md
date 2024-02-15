@@ -6,7 +6,7 @@ $ sudo apt install zsh
 
 # REQUIRES
 #starship
-# a nerd font
+#a nerd font
  
 
 #copy the .zsh folder and .zshrc in home dir
