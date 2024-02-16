@@ -28,6 +28,6 @@ $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 #copy the .zsh  and .zshrc in home dir
 
-#make the deaful shell to zsh
+# make the deaful shell to zsh
 
 $ chsh -s $(which zsh)
