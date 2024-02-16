@@ -6,11 +6,19 @@
 
 $ sudo apt install zsh
 
-#also install
-#starship
-#a nerd font
+# install these from their page
 
-# clone these two inside .zsh directory
+#a nerd font of your choice(can skip)
+
+https://www.nerdfonts.com/
+
+#starship
+
+https://starship.rs/ja-jp/guide/
+
+
+# Then , clone these two inside .zsh directory
+
 $ cd .zsh
 
 $ git clone https://github.com/zsh-users/zsh-autosuggestions
@@ -18,7 +26,7 @@ $ git clone https://github.com/zsh-users/zsh-autosuggestions
 $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 
-#copy the .zsh folder and .zshrc in home dir
+#copy the .zsh  and .zshrc in home dir
 
 #make the deaful shell to zsh
 
