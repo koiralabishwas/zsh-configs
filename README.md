@@ -12,7 +12,9 @@ $ sudo apt install zsh
 
 # clone these two inside .zsh directory
 $ cd .zsh
+
 $ git clone https://github.com/zsh-users/zsh-autosuggestions
+
 $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 
