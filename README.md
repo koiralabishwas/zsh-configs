@@ -17,7 +17,7 @@ https://www.nerdfonts.com/
 https://starship.rs/ja-jp/guide/
 
 
-# Then , clone these two inside .zsh directory and zopy .zsh in home directory
+# Then , clone these two inside .zsh directory and copy .zsh in home directory
 
 $ cd .zsh
 
