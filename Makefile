@@ -16,19 +16,19 @@ install-font-macos: ## install font for macos [ args : FONT_NAME ]
 	brew tap homebrew/cask-fonts
 	brew install --cask $(FONT_NAME)
 	
-install-font-linux: ## install font for linux [ args : FONT_NAME ]
+install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME ]
 	@echo "どうやってやるのこれ？"
 
 install-zsh-macos: ## install zsh for macos
 	brew install zsh
 
-install-zsh-linux: ## install zsh for linux
+install-zsh-ubuntu: ## install zsh for ubuntu
 	sudo apt install zsh
 
 install-starship-macos: ## install starship for macos
 	brew install starship
 
-install-starship-linux: ## install starship for linux
+install-starship-ubuntu: ## install starship for ubuntu
 	curl -sS https://starship.rs/install.sh | sh
 
 clone-repos: ## clone repos
@@ -82,13 +82,13 @@ remove-font: ## remove font [ args : FONT_NAME ]
 remove-zsh-macos: ## remove zsh for macos
 	brew uninstall zsh
 
-remove-zsh-linux: ## remove zsh for linux
+remove-zsh-ubuntu: ## remove zsh for ubuntu
 	sudo apt remove --purge zsh
 
 remove-starship-macos: ## remove starship for macos
 	brew uninstall starship
 
-remove-starship-linux: ## remove starship for linux
+remove-starship-ubuntu: ## remove starship for ubuntu
 	# Assuming uninstallation is simply removing the binary as there's no standard uninstall script
 	rm -f $(which starship)
 
