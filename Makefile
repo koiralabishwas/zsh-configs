@@ -17,7 +17,7 @@ install-font-macos: ## install font for macos [ args : FONT_NAME ]
 	brew install --cask $(FONT_NAME)
 	
 install-font-linux: ## install font for linux [ args : FONT_NAME ]
-	@echo "どうやってたるのこれ？"
+	@echo "どうやってやるのこれ？"
 
 install-zsh-macos: ## install zsh for macos
 	brew install zsh
