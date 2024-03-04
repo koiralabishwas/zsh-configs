@@ -7,15 +7,18 @@ help: ## help
 
 install-all: ## install all [ args : OS ]
 	make install-zsh-$(OS)
-	make install-font
+	make install-font-$(OS)
 	make install-starship-$(OS)
 	make clone-repos
 	make setup-zsh
 
-install-font: ## install font [ args : FONT_NAME ]
+install-font-macos: ## install font for macos [ args : FONT_NAME ]
 	brew tap homebrew/cask-fonts
 	brew install --cask $(FONT_NAME)
 	
+install-font-linux: ## install font for linux [ args : FONT_NAME ]
+	@echo "どうやってたるのこれ？"
+
 install-zsh-macos: ## install zsh for macos
 	brew install zsh
 
