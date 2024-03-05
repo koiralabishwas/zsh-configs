@@ -86,29 +86,3 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	fi
 	@echo "Setup completed!!! Please restart your terminal or run:"
 	@echo "\tsource ~/.zshrc"
-
-remove-all: ## remove all installed components [ args : OS ]
-	make remove-font-$(OS)
-	make remove-repos
-	make remove-zsh-setup
-
-remove-font-macos: ## remove font [ args : FONT_NAME_CODE ]
-	@echo "Uninstalling font..."
-	brew uninstall --cask $(FONT_NAME_CODE)
-
-remove-font-ubuntu: ## remove font [ args : FONT_NAME ]
-	@echo "Uninstalling font..."
-	rm -f ~/.local/share/fonts/$(FONT_NAME)
-	fc-cache -f -v
-
-remove-repos: ## remove cloned repos
-	@echo "Removing zsh-config repos..."
-	rm -rf ~/.zsh
-
-remove-zsh-setup: ## remove .zsh-config and update .zshrc
-	@echo "Removing .zsh-config..."
-	@rm -f ~/.zsh-config
-	@echo "Updating .zshrc to remove source to .zsh-config..."
-	@sed -i '' '/.zsh-config/d' ~/.zshrc
-	@echo "Removal completed!!! Please restart your terminal or run:"
-	@echo "\tsource ~/.zshrc"
