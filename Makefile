@@ -1,5 +1,7 @@
 OS=macos
-FONT_NAME=font-hack-nerd-font
+FONT_NAME_CODE=font-hack-nerd-font
+FONT_NAME=Hack
+FONT_VERSION=v3.1.1
 
 help: ## help
 	@echo "------- Commands ------"
@@ -26,11 +28,16 @@ set-zsh-as-default: ## set zsh as default shell
 	chsh -s /bin/zsh
 
 install-font-macos: ## install font for macos [ args : FONT_NAME ]
+	@echo "Installing fonts..."
 	brew tap homebrew/cask-fonts
-	brew install --cask $(FONT_NAME)
+	brew install --cask $(FONT_NAME_CODE)
 	
-install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME ]
-	@echo "どうやってやるのこれ？"
+install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME, FONT_VERSION ]
+	@echo "Installing fonts..."
+	wget https://github.com/ryanoasis/nerd-fonts/releases/download/$(FONT_VERSION)/$(FONT_NAME).zip
+	mkdir -p ~/.local/share/fonts/
+	unzip $(FONT_NAME).zip -d ~/.local/share/fonts/$(FONT_NAME)
+	fc-cache -f -v
 
 install-zsh-macos: ## install zsh for macos
 	@echo "Installing zsh..."
