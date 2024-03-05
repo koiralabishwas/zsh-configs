@@ -14,9 +14,11 @@ install-all: ## install all [ args : OS ]
 	make setup-zsh
 
 install-starship-macos: ## install starship for macos
+	@echo "Installing starship..."
 	brew install starship
 
 install-starship-ubuntu: ## install starship for ubuntu
+	@echo "Installing starship..."
 	curl -sS https://starship.rs/install.sh | sh
 
 set-zsh-as-default: ## set zsh as default shell
@@ -31,10 +33,12 @@ install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME ]
 	@echo "どうやってやるのこれ？"
 
 install-zsh-macos: ## install zsh for macos
+	@echo "Installing zsh..."
 	brew update
 	brew install zsh
 
 install-zsh-ubuntu: ## install zsh for ubuntu
+	@echo "Installing zsh..."
 	sudo apt-get update && sudo apt-get upgrade
 	sudo apt install zsh
 
@@ -84,22 +88,27 @@ remove-all: ## remove all installed components [ args : OS ]
 	make remove-zsh-setup
 
 remove-font: ## remove font [ args : FONT_NAME ]
+	@echo "Uninstalling font..."
 	brew uninstall --cask $(FONT_NAME)
 
 remove-zsh-macos: ## remove zsh for macos
+	@echo "Uninstalling zsh..."
 	brew uninstall zsh
 
 remove-zsh-ubuntu: ## remove zsh for ubuntu
+	@echo "Uninstalling zsh..."
 	sudo apt remove --purge zsh
 
 remove-starship-macos: ## remove starship for macos
+	@echo "Uninstalling starship..."
 	brew uninstall starship
 
 remove-starship-ubuntu: ## remove starship for ubuntu
-	# Assuming uninstallation is simply removing the binary as there's no standard uninstall script
+	@echo "Uninstalling starship..."
 	rm -f $(which starship)
 
 remove-repos: ## remove cloned repos
+	@echo "Removing zsh-config repos..."
 	rm -rf ~/.zsh
 
 remove-zsh-setup: ## remove .zsh-config and update .zshrc
