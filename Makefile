@@ -41,12 +41,18 @@ install-font-macos: ## install font for macos [ args : FONT_NAME_CODE ]
 	@echo "Installing fonts..."
 	brew tap homebrew/cask-fonts
 	brew install --cask $(FONT_NAME_CODE)
+
+
+	
 	
 install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME, FONT_VERSION ]
 	@echo "Installing fonts..."
 	wget https://github.com/ryanoasis/nerd-fonts/releases/download/$(FONT_VERSION)/$(FONT_NAME).zip
 	mkdir -p ~/.local/share/fonts/
+	sudo apt install unzip ## sometimes the unzip is not available by default
 	unzip $(FONT_NAME).zip -d ~/.local/share/fonts/$(FONT_NAME)
+	
+	sudo apt install fontconfig ## sometime fontconfig is not installed by default
 	fc-cache -f -v
 
 clone-repos: ## clone repos
