@@ -1,33 +1,31 @@
-# Saving my zsh configurations here
+## Steps
 
-#first install zsh
+1. Run
 
-# linux
+```
+make help
+```
 
-$ sudo apt install zsh
+2. Install
 
-# install these from their page
+```
+make install-all
+```
 
-#a nerd font of your choice(can skip)
+or
 
-https://www.nerdfonts.com/
+```
+make install-all OS=ubuntu FONT_NAME=font-hack-nerd-font
+```
 
-#starship
+3. Remove
 
-https://starship.rs/ja-jp/guide/
+```
+make remove-all
+```
 
+or
 
-# Then , clone these two inside .zsh directory and copy .zsh in home directory
-
-$ cd .zsh
-
-$ git clone https://github.com/zsh-users/zsh-autosuggestions
-
-$ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-
-
-#copy the .zsh  and .zshrc in home dir
-
-# make the deaful shell to zsh
-
-$ chsh -s $(which zsh)
+```
+make remove-all OS=ubuntu
+```
