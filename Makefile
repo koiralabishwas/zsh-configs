@@ -7,10 +7,21 @@ help: ## help
 
 install-all: ## install all [ args : OS ]
 	make install-zsh-$(OS)
+	make set-zsh-as-default
 	make install-font-$(OS)
 	make install-starship-$(OS)
 	make clone-repos
 	make setup-zsh
+
+install-starship-macos: ## install starship for macos
+	brew install starship
+
+install-starship-ubuntu: ## install starship for ubuntu
+	curl -sS https://starship.rs/install.sh | sh
+
+set-zsh-as-default: ## set zsh as default shell
+	@echo "Setting zsh as default shell..."
+	chsh -s /bin/zsh
 
 install-font-macos: ## install font for macos [ args : FONT_NAME ]
 	brew tap homebrew/cask-fonts
@@ -20,16 +31,12 @@ install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME ]
 	@echo "どうやってやるのこれ？"
 
 install-zsh-macos: ## install zsh for macos
+	brew update
 	brew install zsh
 
 install-zsh-ubuntu: ## install zsh for ubuntu
+	sudo apt-get update && sudo apt-get upgrade
 	sudo apt install zsh
-
-install-starship-macos: ## install starship for macos
-	brew install starship
-
-install-starship-ubuntu: ## install starship for ubuntu
-	curl -sS https://starship.rs/install.sh | sh
 
 clone-repos: ## clone repos
 	@mkdir -p ~/.zsh && \
