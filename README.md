@@ -9,11 +9,23 @@ make help
 2. Install
 
 ```
-make install-all OS=macos FONT_NAME=font-hack-nerd-font
+make install-all
+```
+
+or
+
+```
+make install-all OS=ubuntu FONT_NAME=font-hack-nerd-font
 ```
 
 3. Remove
 
 ```
-make remove-all OS=macos
+make remove-all
+```
+
+or
+
+```
+make remove-all OS=ubuntu
 ```
