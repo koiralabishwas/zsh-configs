@@ -76,6 +76,8 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	echo 'autoload -Uz compinit'; \
 	echo 'compinit'; \
 	echo '# End of lines added by compinstall'; \
+	echo ' # colour of dir'; \
+  echo 'alias ls="ls --color" '; \
 	echo ''; \
 	echo '#syntax highlighting extension'; \
 	echo 'source "${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"'; \
