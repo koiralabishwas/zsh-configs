@@ -15,6 +15,20 @@ install-all: ## install all [ args : OS ]
 	make clone-repos
 	make setup-zsh
 
+install-zsh-macos: ## install zsh for macos
+	@echo "Installing zsh..."
+	brew update
+	brew install zsh
+
+install-zsh-ubuntu: ## install zsh for ubuntu
+	@echo "Installing zsh..."
+	sudo apt-get update && sudo apt-get upgrade
+	sudo apt install zsh
+
+set-zsh-as-default: ## set zsh as default shell
+	@echo "Setting zsh as default shell..."
+	chsh -s /bin/zsh
+
 install-starship-macos: ## install starship for macos
 	@echo "Installing starship..."
 	brew install starship
@@ -23,11 +37,7 @@ install-starship-ubuntu: ## install starship for ubuntu
 	@echo "Installing starship..."
 	curl -sS https://starship.rs/install.sh | sh
 
-set-zsh-as-default: ## set zsh as default shell
-	@echo "Setting zsh as default shell..."
-	chsh -s /bin/zsh
-
-install-font-macos: ## install font for macos [ args : FONT_NAME ]
+install-font-macos: ## install font for macos [ args : FONT_NAME_CODE ]
 	@echo "Installing fonts..."
 	brew tap homebrew/cask-fonts
 	brew install --cask $(FONT_NAME_CODE)
@@ -38,16 +48,6 @@ install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME, FONT_VERSION
 	mkdir -p ~/.local/share/fonts/
 	unzip $(FONT_NAME).zip -d ~/.local/share/fonts/$(FONT_NAME)
 	fc-cache -f -v
-
-install-zsh-macos: ## install zsh for macos
-	@echo "Installing zsh..."
-	brew update
-	brew install zsh
-
-install-zsh-ubuntu: ## install zsh for ubuntu
-	@echo "Installing zsh..."
-	sudo apt-get update && sudo apt-get upgrade
-	sudo apt install zsh
 
 clone-repos: ## clone repos
 	@mkdir -p ~/.zsh && \
@@ -88,31 +88,18 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	@echo "\tsource ~/.zshrc"
 
 remove-all: ## remove all installed components [ args : OS ]
-	make remove-zsh-$(OS)
-	make remove-font
-	make remove-starship-$(OS)
+	make remove-font-$(OS)
 	make remove-repos
 	make remove-zsh-setup
 
-remove-font: ## remove font [ args : FONT_NAME ]
+remove-font-macos: ## remove font [ args : FONT_NAME_CODE ]
 	@echo "Uninstalling font..."
-	brew uninstall --cask $(FONT_NAME)
+	brew uninstall --cask $(FONT_NAME_CODE)
 
-remove-zsh-macos: ## remove zsh for macos
-	@echo "Uninstalling zsh..."
-	brew uninstall zsh
-
-remove-zsh-ubuntu: ## remove zsh for ubuntu
-	@echo "Uninstalling zsh..."
-	sudo apt remove --purge zsh
-
-remove-starship-macos: ## remove starship for macos
-	@echo "Uninstalling starship..."
-	brew uninstall starship
-
-remove-starship-ubuntu: ## remove starship for ubuntu
-	@echo "Uninstalling starship..."
-	rm -f $(which starship)
+remove-font-ubuntu: ## remove font [ args : FONT_NAME ]
+	@echo "Uninstalling font..."
+	rm -f ~/.local/share/fonts/$(FONT_NAME)
+	fc-cache -f -v
 
 remove-repos: ## remove cloned repos
 	@echo "Removing zsh-config repos..."
