@@ -42,6 +42,11 @@ install-font-macos: ## install font for macos [ args : FONT_NAME_CODE ]
 	brew tap homebrew/cask-fonts
 	brew install --cask $(FONT_NAME_CODE)
 
+install-colorls-ubuntu :
+	@echo "Installing colorls..."
+	sudo apt install ruby-dev
+	sudo apt innstall build-essential
+	sudo gem install colorls
 
 	
 	
@@ -85,6 +90,11 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	echo 'source "${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"'; \
 	echo '#starship init'; \
 	echo 'eval "$$(starship init zsh)"'; \
+	echo ' # colorls settings'
+	echo 'alias lc='colorls''
+	echo 'source $(dirname $(gem which colorls))/tab_complete.sh'
+
+	
 	} > ~/.zsh-config
 	@echo "Updating .zshrc to source .zsh-config..."
 	@if grep -q '.zsh-config' ~/.zshrc; then \
@@ -94,3 +104,5 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	fi
 	@echo "Setup completed!!! Please restart your terminal or run:"
 	@echo "\tsource ~/.zshrc"
+
+
