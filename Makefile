@@ -42,23 +42,20 @@ install-font-macos: ## install font for macos [ args : FONT_NAME_CODE ]
 	brew tap homebrew/cask-fonts
 	brew install --cask $(FONT_NAME_CODE)
 
-install-colorls-ubuntu :
-	@echo "Installing colorls..."
-	sudo apt install ruby-dev
-	sudo apt innstall build-essential
-	sudo gem install colorls
-
-	
-	
 install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME, FONT_VERSION ]
 	@echo "Installing fonts..."
 	wget https://github.com/ryanoasis/nerd-fonts/releases/download/$(FONT_VERSION)/$(FONT_NAME).zip
 	mkdir -p ~/.local/share/fonts/
 	sudo apt install unzip ## sometimes the unzip is not available by default
 	unzip $(FONT_NAME).zip -d ~/.local/share/fonts/$(FONT_NAME)
-	
-	sudo apt install fontconfig ## sometime fontconfig is not installed by default
+	sudo apt install fontconfig ## sometimes fontconfig is not installed by default
 	fc-cache -f -v
+
+install-colorls-ubuntu:
+	@echo "Installing colorls..."
+	sudo apt install ruby-dev
+	sudo apt install build-essential
+	sudo gem install colorls
 
 clone-repos: ## clone repos
 	@mkdir -p ~/.zsh && \
@@ -81,8 +78,8 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	echo 'autoload -Uz compinit'; \
 	echo 'compinit'; \
 	echo '# End of lines added by compinstall'; \
-	echo ' # colour of dir'; \
-  echo 'alias ls="ls --color" '; \
+	echo '# colour of dir'; \
+	echo 'alias ls="ls --color" '; \
 	echo ''; \
 	echo '#syntax highlighting extension'; \
 	echo 'source "${HOME}/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"'; \
@@ -90,19 +87,16 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	echo 'source "${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"'; \
 	echo '#starship init'; \
 	echo 'eval "$$(starship init zsh)"'; \
-	echo ' # colorls settings'
-	echo 'alias lc='colorls''
-	echo 'source $(dirname $(gem which colorls))/tab_complete.sh'
-
-	
+	echo '# colorls settings'; \
+	echo 'alias lc='colorls''; \
+	echo 'source $(dirname $(gem which colorls))/tab_complete.sh'; \
+	echo '# command-not-found utility'; \
+	echo 'if [ -f /etc/zsh_command_not_found ]; then'; \
+	echo '. /etc/zsh_command_not_found'; \
+	echo 'fi'; \
 	} > ~/.zsh-config
 	@echo "Updating .zshrc to source .zsh-config..."
 	@if grep -q '.zsh-config' ~/.zshrc; then \
 	echo '.zsh-config already sourced in .zshrc'; \
 	else \
-	echo 'source ~/.zsh-config' >> ~/.zshrc; \
-	fi
-	@echo "Setup completed!!! Please restart your terminal or run:"
-	@echo "\tsource ~/.zshrc"
-
-
+	echo 'source ~/.zsh-config' >> ~/.zshrc;
