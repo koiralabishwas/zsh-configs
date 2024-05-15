@@ -51,7 +51,7 @@ install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME, FONT_VERSION
 	sudo apt install fontconfig ## sometimes fontconfig is not installed by default
 	fc-cache -f -v
 
-install-colorls-ubuntu:
+install-colorls-ubuntu: ## install colorls for ubuntu
 	@echo "Installing colorls..."
 	sudo apt install ruby-dev
 	sudo apt install build-essential
