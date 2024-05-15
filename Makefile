@@ -14,6 +14,8 @@ install-all-configs: ## install all [ args : OS ]
 	make install-starship-$(OS)
 	make clone-repos
 	make setup-zsh
+	make install-nvm-$(OS)
+	make install-bun-$(OS)
 
 install-zsh-macos: ## install zsh for macos
 	@echo "Installing zsh..."
@@ -56,6 +58,20 @@ install-colorls-ubuntu: ## install colorls for ubuntu
 	sudo apt install ruby-dev
 	sudo apt install build-essential
 	sudo gem install colorls
+
+install-nvm-ubuntu: ## install nvm for ubuntu
+	@echo "Installing nvm..."
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+	@echo "Adding nvm to .zshrc..."
+	@if ! grep -q 'export NVM_DIR="$HOME/.nvm"' ~/.zshrc; then \
+		echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc; \
+		echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc; \
+		echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion' >> ~/.zshrc; \
+	fi
+
+install-bun-ubuntu: ## install bun for ubuntu
+	@echo "Installing bun..."
+	curl -fsSL https://bun.sh/install | bash
 
 
 clone-repos: ## clone repos
@@ -102,5 +118,3 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	else \
 		echo 'source ~/.zsh-config' >> ~/.zshrc; \
 	fi
-
-	
