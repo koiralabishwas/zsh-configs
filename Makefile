@@ -1,13 +1,13 @@
-OS=macos
+OS=ubuntu
 FONT_NAME_CODE=font-hack-nerd-font
-FONT_NAME=Hack
+FONT_NAME=0xProto
 FONT_VERSION=v3.1.1
 
 help: ## help
 	@echo "------- Commands ------"
 	@grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36mmake %-25s\033[0m %s\n", $$1, $$2}'
 
-install-all: ## install all [ args : OS ]
+install-all-configs: ## install all [ args : OS ]
 	make install-zsh-$(OS)
 	make set-zsh-as-default
 	make install-font-$(OS)
@@ -57,6 +57,7 @@ install-colorls-ubuntu: ## install colorls for ubuntu
 	sudo apt install build-essential
 	sudo gem install colorls
 
+
 clone-repos: ## clone repos
 	@mkdir -p ~/.zsh && \
 	cd ~/.zsh && \
@@ -101,3 +102,5 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	else \
 		echo 'source ~/.zsh-config' >> ~/.zshrc; \
 	fi
+
+	
