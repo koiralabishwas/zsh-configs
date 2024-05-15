@@ -63,11 +63,13 @@ install-nvm-ubuntu: ## install nvm for ubuntu
 	@echo "Installing nvm..."
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 	@echo "Adding nvm to .zshrc..."
-	@if ! grep -q 'export NVM_DIR="$HOME/.nvm"' ~/.zshrc; then \
-		echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc; \
-		echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc; \
-		echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion' >> ~/.zshrc; \
+	@if ! grep -q 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' ~/.zshrc; then \
+		echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc; \
+		echo '[ -s "$$NVM_DIR/nvm.sh" ] && \. "$$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc; \
+		echo '[ -s "$$NVM_DIR/bash_completion" ] && \. "$$NVM_DIR/bash_completion" # This loads nvm bash_completion' >> ~/.zshrc; \
 	fi
+	@echo "NVM installation and configuration complete."
+
 
 install-bun-ubuntu: ## install bun for ubuntu
 	@echo "Installing bun..."
