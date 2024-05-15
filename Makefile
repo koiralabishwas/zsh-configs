@@ -88,8 +88,8 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	echo '#starship init'; \
 	echo 'eval "$$(starship init zsh)"'; \
 	echo '# colorls settings'; \
-	echo 'alias lc='colorls''; \
-	echo 'source $(dirname $(gem which colorls))/tab_complete.sh'; \
+	echo 'alias lc="colorls"'; \
+	echo 'source $$(dirname $$(gem which colorls))/tab_complete.sh'; \
 	echo '# command-not-found utility'; \
 	echo 'if [ -f /etc/zsh_command_not_found ]; then'; \
 	echo '. /etc/zsh_command_not_found'; \
@@ -97,6 +97,7 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	} > ~/.zsh-config
 	@echo "Updating .zshrc to source .zsh-config..."
 	@if grep -q '.zsh-config' ~/.zshrc; then \
-	echo '.zsh-config already sourced in .zshrc'; \
+		echo '.zsh-config already sourced in .zshrc'; \
 	else \
-	echo 'source ~/.zsh-config' >> ~/.zshrc;
+		echo 'source ~/.zsh-config' >> ~/.zshrc; \
+	fi
