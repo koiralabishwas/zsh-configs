@@ -3,24 +3,11 @@ FONT_NAME_CODE=font-hack-nerd-font
 FONT_NAME=0xProto
 FONT_VERSION=v3.1.1
 
-help: ## help
+help: ## help  first setup zsh and reboot for gods shake
 	@echo "------- Commands ------"
 	@grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36mmake %-25s\033[0m %s\n", $$1, $$2}'
 
-install-all-configs: ## install all [ args : OS ]
-	make install-zsh-$(OS)
-	make set-zsh-as-default
-	make install-font-$(OS)
-	make install-starship-$(OS)
-	make clone-repos
-	make setup-zsh
-	make install-nvm-$(OS)
-	make install-bun-$(OS)
 
-install-zsh-macos: ## install zsh for macos
-	@echo "Installing zsh..."
-	brew update
-	brew install zsh
 
 install-zsh-ubuntu: ## install zsh for ubuntu
 	@echo "Installing zsh..."
@@ -31,18 +18,13 @@ set-zsh-as-default: ## set zsh as default shell
 	@echo "Setting zsh as default shell..."
 	chsh -s /bin/zsh
 
-install-starship-macos: ## install starship for macos
-	@echo "Installing starship..."
-	brew install starship
+
 
 install-starship-ubuntu: ## install starship for ubuntu
 	@echo "Installing starship..."
 	curl -sS https://starship.rs/install.sh | sh
 
-install-font-macos: ## install font for macos [ args : FONT_NAME_CODE ]
-	@echo "Installing fonts..."
-	brew tap homebrew/cask-fonts
-	brew install --cask $(FONT_NAME_CODE)
+
 
 install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME, FONT_VERSION ]
 	@echo "Installing fonts..."
@@ -59,25 +41,6 @@ install-colorls-ubuntu: ## install colorls for ubuntu
 	sudo apt install build-essential
 	sudo gem install colorls
 
-install-nvm-ubuntu: ## install nvm for ubuntu
-	@echo "Installing nvm..."
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-	@echo "Adding nvm to .zshrc..."
-	@if ! grep -q 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' ~/.zshrc; then \
-		echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc; \
-		echo '[ -s "$$NVM_DIR/nvm.sh" ] && \. "$$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc; \
-		echo '[ -s "$$NVM_DIR/bash_completion" ] && \. "$$NVM_DIR/bash_completion" # This loads nvm bash_completion' >> ~/.zshrc; \
-	fi
-	@echo "NVM installation and configuration complete."
-
-install-bun-ubuntu: ## install bun for ubuntu
-	@echo "Installing bun..."
-	curl -fsSL https://bun.sh/install | bash
-	@echo "Adding bun to .zshrc..."
-	@if ! grep -q 'export BUN_INSTALL="$HOME/.bun"' ~/.zshrc; then \
-		echo 'export BUN_INSTALL="$HOME/.bun"' >> ~/.zshrc; \
-		echo 'export PATH="$BUN_INSTALL/bin:/bin:/usr/bin:$PATH"' >> ~/.zshrc; \
-	fi
 
 clone-repos: ## clone repos
 	@mkdir -p ~/.zsh && \
@@ -123,3 +86,20 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 	else \
 		echo 'source ~/.zsh-config' >> ~/.zshrc; \
 	fi
+
+# do these after doing the settings above
+# additions programming tools i.e save in .zshrc
+install-nvm-ubuntu: ## install nvm for ubuntu
+	@echo "Installing nvm..."
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+	@echo "Adding nvm to .zshrc..."
+	@if ! grep -q 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' ~/.zshrc; then \
+		echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc; \
+		echo '[ -s "$$NVM_DIR/nvm.sh" ] && \. "$$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc; \
+		echo '[ -s "$$NVM_DIR/bash_completion" ] && \. "$$NVM_DIR/bash_completion" # This loads nvm bash_completion' >> ~/.zshrc; \
+	fi
+	@echo "NVM installation and configuration complete."
+
+install-bun-ubuntu: ## install bun for ubuntu
+	@echo "Installing bun..."
+	curl -fsSL https://bun.sh/install | bash
