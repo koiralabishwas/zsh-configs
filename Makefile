@@ -1,5 +1,3 @@
-# Makefile for setting up various configurations
-
 OS=ubuntu
 FONT_NAME_CODE=font-hack-nerd-font
 FONT_NAME=0xProto
@@ -60,19 +58,6 @@ install-colorls-ubuntu: ## install colorls for ubuntu
 	sudo apt install ruby-dev
 	sudo apt install build-essential
 	sudo gem install colorls
-	
-install-nala-ubuntu: ## install a good UX visual wrapper for apt package manager
-	@echo "Installing Nala..."
-	sudo apt update
-	sudo apt install -y nala
-	@echo "Setting up zsh completion for Nala..."
-	@if [ ! -d /usr/share/zsh/functions/Completion/Debian ]; then \
-		sudo mkdir -p /usr/share/zsh/functions/Completion/Debian; \
-	fi
-	sudo ln -sf /usr/share/zsh/functions/Completion/Debian/_apt /usr/share/zsh/functions/Completion/Debian/_nala
-	@echo "Reloading zsh configuration..."
-	source ~/.zshrc
-	@echo "Nala installation and zsh completion setup complete."
 
 install-nvm-ubuntu: ## install nvm for ubuntu
 	@echo "Installing nvm..."
@@ -85,10 +70,14 @@ install-nvm-ubuntu: ## install nvm for ubuntu
 	fi
 	@echo "NVM installation and configuration complete."
 
-
 install-bun-ubuntu: ## install bun for ubuntu
 	@echo "Installing bun..."
 	curl -fsSL https://bun.sh/install | bash
+	@echo "Adding bun to .zshrc..."
+	@if ! grep -q 'export BUN_INSTALL="$HOME/.bun"' ~/.zshrc; then \
+		echo 'export BUN_INSTALL="$HOME/.bun"' >> ~/.zshrc; \
+		echo 'export PATH="$BUN_INSTALL/bin:/bin:/usr/bin:$PATH"' >> ~/.zshrc; \
+	fi
 
 clone-repos: ## clone repos
 	@mkdir -p ~/.zsh && \
