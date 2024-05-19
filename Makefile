@@ -7,8 +7,6 @@ help: ## help  first setup zsh and reboot for gods shake
 	@echo "------- Commands ------"
 	@grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36mmake %-25s\033[0m %s\n", $$1, $$2}'
 
-
-
 install-zsh-ubuntu: ## install zsh for ubuntu
 	@echo "Installing zsh..."
 	sudo apt-get update && sudo apt-get upgrade
@@ -18,13 +16,9 @@ set-zsh-as-default: ## set zsh as default shell
 	@echo "Setting zsh as default shell..."
 	chsh -s /bin/zsh
 
-
-
 install-starship-ubuntu: ## install starship for ubuntu
 	@echo "Installing starship..."
 	curl -sS https://starship.rs/install.sh | sh
-
-
 
 install-font-ubuntu: ## install font for ubuntu [ args : FONT_NAME, FONT_VERSION ]
 	@echo "Installing fonts..."
@@ -40,7 +34,6 @@ install-colorls-ubuntu: ## install colorls for ubuntu
 	sudo apt install ruby-dev
 	sudo apt install build-essential
 	sudo gem install colorls
-
 
 clone-repos: ## clone repos
 	@mkdir -p ~/.zsh && \
@@ -87,7 +80,7 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 		echo 'source ~/.zsh-config' >> ~/.zshrc; \
 	fi
 
-# do these after doing the settings above
+# do these after doing the settings above↑
 # additions programming tools i.e save in .zshrc
 install-nvm-ubuntu: ## install nvm for ubuntu
 	@echo "Installing nvm..."
@@ -98,7 +91,9 @@ install-nvm-ubuntu: ## install nvm for ubuntu
 		echo '[ -s "$$NVM_DIR/nvm.sh" ] && \. "$$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc; \
 		echo '[ -s "$$NVM_DIR/bash_completion" ] && \. "$$NVM_DIR/bash_completion" # This loads nvm bash_completion' >> ~/.zshrc; \
 	fi
-	@echo "NVM installation and configuration complete."
+	@echo "Running additional command after NVM installation..."
+	@export NVM_DIR=~/.nvm && . ~/.nvm/nvm.sh && echo "NVM commands executed."
+
 
 install-bun-ubuntu: ## install bun for ubuntu
 	@echo "Installing bun..."
