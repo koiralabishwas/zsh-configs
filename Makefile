@@ -12,6 +12,7 @@ install-zsh-ubuntu: ## install zsh for ubuntu and set zsh as default shell
 	sudo apt install zsh
 	@echo "Setting zsh as default shell..."
 	chsh -s /bin/zsh
+	@echo "!!!!!Plese Restart your Shell / Terminal App !!!!!!!!!"
 
 install-starship-ubuntu: ## install starship for ubuntu
 	@echo "Installing starship..."
