@@ -7,12 +7,9 @@ help: ## help  first setup zsh and reboot for gods shake
 	@echo "------- Commands ------"
 	@grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36mmake %-25s\033[0m %s\n", $$1, $$2}'
 
-install-zsh-ubuntu: ## install zsh for ubuntu
+install-zsh-ubuntu: ## install zsh for ubuntu and set zsh as default shell
 	@echo "Installing zsh..."
-	sudo apt-get update && sudo apt-get upgrade
 	sudo apt install zsh
-
-set-zsh-as-default: ## set zsh as default shell
 	@echo "Setting zsh as default shell..."
 	chsh -s /bin/zsh
 
