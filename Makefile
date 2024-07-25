@@ -78,6 +78,7 @@ setup-zsh: ## create .zsh-config and update .zshrc to source it
 		echo 'source ~/.zsh-config' >> ~/.zshrc; \
 	fi
 
+	@echo "please reboot your machine before installing nvm"
 # do these after doing the settings above↑
 # additions programming tools i.e save in .zshrc
 install-nvm-ubuntu: ## install nvm for ubuntu
